@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a url</title>
+</head>
+
+<body>
+    <form id="createUrl" method="post">
+        <h1>Créer un raccourci</h1>
+        <input type="text" name="url" />
+        <button onclick="submitHandler()">
+            Créer
+        </button>
+    </form>
+
+    <script>
+        const form = document.getElementById("createUrl")
+
+        form.addEventListener("submit", (e) => {
+            e.preventDefault()
+            let url = e.target.elements[0].value
+            fetch('http://localhost:8080/shorten', () => {
+                const formData = FormData
+                formData.arguments("url", url)
+            }).then((res) => {
+                console.log(res)
+            })
+        })
+
+    </script>
+</body>
+
+</html>
